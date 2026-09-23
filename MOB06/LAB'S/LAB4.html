@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Mochila de Viagem</title>
+    <style>
+        body { text-align: center; background: #f0fdf4; font-family: sans-serif; padding: 20px; }
+        .card { background: white; max-width: 320px; margin: 30px auto; padding: 20px; border: 2px solid #16a34a; border-radius: 12px; }
+        h2 { color: #15803d; }
+        label { display: block; margin: 8px; text-align: left; }
+        button { margin-top: 15px; padding: 10px 20px; background: #16a34a; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #15803d; }
+        #saida { padding: 10px; background: #dcfce7; border-radius: 8px; margin-top: 12px; font-size: 0.9rem; min-height: 20px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎒 Mochila de Viagem</h2>
+        <p>O que levar?</p>
+        <label><input type="checkbox" id="roupas"> 👕 Roupas</label>
+        <label><input type="checkbox" id="higiene"> 🧴 Kit de higiene</label>
+        <label><input type="checkbox" id="eletronicos"> 🔌 Eletrônicos</label>
+        <button onclick="fecharMochila()">Fechar Mochila</button>
+        <p id="saida"></p>
+    </div>
+
+    <script>
+        function fecharMochila() {
+            let itens = "";
+            if (document.getElementById("roupas").checked) {
+                itens += "Roupas ";
+            }
+            if (document.getElementById("higiene").checked) {
+                itens += "Kit de higiene ";
+            }
+            if (document.getElementById("eletronicos").checked) {
+                itens += "Eletrônicos ";
+            }
+            if (itens === "") {
+                itens = "Nenhum item selecionado";
+            }
+            document.getElementById("saida").innerText = "Mochila pronta: " + itens;
+        }
+    </script>
+</body>
+</html>

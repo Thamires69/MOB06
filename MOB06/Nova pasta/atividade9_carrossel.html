@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 9 - Carrossel de Imagens</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .galeria {
+            margin: 20px 0;
+        }
+
+        #imagem {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        #imagem:hover {
+            transform: scale(1.02);
+        }
+
+        #titulo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .contador {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-anterior {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .btn-anterior:hover {
+            background-color: #7c3aed;
+        }
+
+        .btn-proximo {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .btn-proximo:hover {
+            background-color: #7c3aed;
+        }
+
+        .indicadores {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .indicador {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .indicador.ativo {
+            background-color: #8b5cf6;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎠 Galeria de Imagens</h2>
+        
+        <div class="galeria">
+            <img id="imagem" src="https://picsum.photos/400/300?random=1" alt="Imagem 1">
+            <div id="titulo">Imagem 1</div>
+            <div class="contador">Imagem <span id="numero">1</span> de 3</div>
+        </div>
+
+        <div class="botoes">
+            <button class="btn-anterior" onclick="retroceder()">⬅️ Anterior</button>
+            <button class="btn-proximo" onclick="avancar()">Próximo ➡️</button>
+        </div>
+
+        <div class="indicadores">
+            <div class="indicador ativo" onclick="irParaImagem(1)"></div>
+            <div class="indicador" onclick="irParaImagem(2)"></div>
+            <div class="indicador" onclick="irParaImagem(3)"></div>
+        </div>
+    </div>
+
+    <script>
+        let numero = 1;
+
+        function avancar() {
+            numero++;
+            if (numero > 3) {
+                numero = 1;
+            }
+            trocarImagem();
+        }
+
+        function retroceder() {
+            numero--;
+            if (numero < 1) {
+                numero = 3;
+            }
+            trocarImagem();
+        }
+
+        function irParaImagem(n) {
+            numero = n;
+            trocarImagem();
+        }
+
+        function trocarImagem() {
+            let imagem = document.getElementById("imagem");
+            let titulo = document.getElementById("titulo");
+            let numeroDiv = document.getElementById("numero");
+            let indicadores = document.querySelectorAll(".indicador");
+
+            // Trocar imagem
+            imagem.src = `https://picsum.photos/400/300?random=${numero}`;
+
+            // Atualizar título
+            if (numero === 1) {
+                titulo.innerText = "🌅 Paisagem Matinal";
+            } else if (numero === 2) {
+                titulo.innerText = "🌊 Praia Paradisíaca";
+            } else if (numero === 3) {
+                titulo.innerText = "🏔️ Montanhas Majestosas";
+            }
+
+            // Atualizar número
+            numeroDiv.innerText = numero;
+
+            // Atualizar indicadores
+            indicadores.forEach((indicador, index) => {
+                if (index + 1 === numero) {
+                    indicador.classList.add("ativo");
+                } else {
+                    indicador.classList.remove("ativo");
+                }
+            });
+        }
+
+        // Inicializar
+        trocarImagem();
+
+        // Teclado: setas para navegar
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowLeft") {
+                retroceder();
+            } else if (event.key === "ArrowRight") {
+                avancar();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Tela Splash</title>
+    <style>
+        body { text-align: center; background: #f8fafc; font-family: sans-serif; padding: 20px; }
+        .card { background: white; max-width: 300px; margin: 30px auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        #splash { border: 3px solid #2563eb; }
+        #conteudo { display: none; }
+        h1 { color: #2563eb; }
+    </style>
+</head>
+<body>
+    <div class="card" id="splash">
+        <h1>📱 Meu Aplicativo</h1>
+        <p id="mensagem">Carregando...</p>
+    </div>
+
+    <div class="card" id="conteudo">
+        <h2>🏠 Página Inicial</h2>
+        <p>Bem-vindo ao aplicativo!</p>
+    </div>
+
+    <script>
+        let mensagem = document.getElementById("mensagem");
+
+        setTimeout(function() {
+            mensagem.innerText = "⚙️ Preparando...";
+        }, 1000);
+
+        setTimeout(function() {
+            mensagem.innerText = "🚀 Quase pronto...";
+        }, 2000);
+
+        setTimeout(function() {
+            document.getElementById("splash").style.display = "none";
+            document.getElementById("conteudo").style.display = "block";
+        }, 3000);
+    </script>
+</body>
+</html>

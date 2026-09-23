@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 8 - Pedido de Lanche</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .formulario {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .grupo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 6px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .radios,
+        .checkboxes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .opcao input[type="radio"],
+        .opcao input[type="checkbox"] {
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .opcao label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #f59e0b;
+            color: white;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #d97706;
+        }
+
+        #saida {
+            padding: 20px;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 8px;
+            font-size: 16px;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+            text-align: left;
+            border: 2px solid #f59e0b;
+        }
+
+        .titulo-saida {
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .dado {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(146, 64, 14, 0.2);
+        }
+
+        .dado:last-child {
+            border-bottom: none;
+        }
+
+        .secao-title {
+            font-weight: bold;
+            margin-top: 8px;
+            margin-bottom: 6px;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🍔 Pedido de Lanche</h2>
+        
+        <div class="formulario">
+            <div class="grupo">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Seu nome" style="width: 100%;">
+            </div>
+
+            <div class="grupo">
+                <label for="tamanho">Tamanho:</label>
+                <select id="tamanho" style="width: 100%;">
+                    <option value="">-- Selecione o tamanho --</option>
+                    <option value="Pequeno">Pequeno</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Grande">Grande</option>
+                </select>
+            </div>
+
+            <div class="grupo">
+                <label>Forma de Pagamento:</label>
+                <div class="radios">
+                    <div class="opcao">
+                        <input type="radio" id="dinheiro" name="pagamento" value="Dinheiro" checked>
+                        <label for="dinheiro">💵 Dinheiro</label>
+                    </div>
+                    <div class="opcao">
+                        <input type="radio" id="cartao" name="pagamento" value="Cartão">
+                        <label for="cartao">💳 Cartão</label>
+                    </div>
+                    <div class="opcao">
+                        <input type="radio" id="pix" name="pagamento" value="PIX">
+                        <label for="pix">📱 PIX</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grupo">
+                <label>Adicionais:</label>
+                <div class="checkboxes">
+                    <div class="opcao">
+                        <input type="checkbox" id="fritas" name="adicionais">
+                        <label for="fritas">🍟 Fritas</label>
+                    </div>
+                    <div class="opcao">
+                        <input type="checkbox" id="refrigerante" name="adicionais">
+                        <label for="refrigerante">🥤 Refrigerante</label>
+                    </div>
+                    <div class="opcao">
+                        <input type="checkbox" id="sobremesa" name="adicionais">
+                        <label for="sobremesa">🍰 Sobremesa</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="finalizarPedido()">Finalizar Pedido</button>
+
+        <div id="saida"></div>
+    </div>
+
+    <script>
+        function finalizarPedido() {
+            let nome = document.getElementById("nome").value.trim();
+            let tamanho = document.getElementById("tamanho").value.trim();
+            let pagamento = document.querySelector('input[name="pagamento"]:checked').value;
+            let saida = document.getElementById("saida");
+
+            if (nome === "" || tamanho === "") {
+                saida.innerHTML = "<p style='color: #991b1b; background: #fee2e2; padding: 10px; border-radius: 6px; text-align: center;'>⚠️ Por favor, preencha nome e tamanho!</p>";
+                return;
+            }
+
+            // Verificar adicionais
+            let adicionais = [];
+            if (document.getElementById("fritas").checked) {
+                adicionais.push("🍟 Fritas");
+            }
+            if (document.getElementById("refrigerante").checked) {
+                adicionais.push("🥤 Refrigerante");
+            }
+            if (document.getElementById("sobremesa").checked) {
+                adicionais.push("🍰 Sobremesa");
+            }
+
+            let adicionaisText = adicionais.length > 0 ? adicionais.join(", ") : "Nenhum";
+
+            let mensagem = `
+                <div class="titulo-saida">✅ Pedido Confirmado!</div>
+                <div class="dado"><strong>Nome:</strong> ${nome}</div>
+                <div class="dado"><strong>Tamanho:</strong> ${tamanho}</div>
+                <div class="dado"><strong>Pagamento:</strong> ${pagamento}</div>
+                <div class="secao-title">Adicionais:</div>
+                <div class="dado">${adicionaisText}</div>
+            `;
+
+            saida.innerHTML = mensagem;
+        }
+
+        // Permitir finalizar ao pressionar Enter
+        document.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                finalizarPedido();
+            }
+        });
+    </script>
+</body>
+</html>

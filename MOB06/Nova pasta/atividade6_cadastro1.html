@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 6 - Cadastro de Cliente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .formulario {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .grupo {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            background: #f0f9ff;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #0ea5e9;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0284c7;
+        }
+
+        #saida {
+            padding: 20px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 8px;
+            font-size: 16px;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .titulo-saida {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .dado {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(30, 64, 175, 0.2);
+        }
+
+        .dado:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📝 Cadastro de Cliente</h2>
+        
+        <div class="formulario">
+            <div class="grupo">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Digite seu nome completo">
+            </div>
+
+            <div class="grupo">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" placeholder="Digite sua idade" min="0" max="150">
+            </div>
+
+            <div class="grupo">
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" placeholder="Digite sua cidade">
+            </div>
+        </div>
+
+        <button onclick="cadastrar()">Cadastrar</button>
+
+        <div id="saida"></div>
+    </div>
+
+    <script>
+        function cadastrar() {
+            let nome = document.getElementById("nome").value.trim();
+            let idade = document.getElementById("idade").value.trim();
+            let cidade = document.getElementById("cidade").value.trim();
+            let saida = document.getElementById("saida");
+
+            if (nome === "" || idade === "" || cidade === "") {
+                saida.innerHTML = "<p style='color: #991b1b; background: #fee2e2; padding: 10px; border-radius: 6px;'>⚠️ Por favor, preencha todos os campos!</p>";
+                return;
+            }
+
+            let mensagem = `
+                <div class="titulo-saida">✅ Cadastro Realizado com Sucesso!</div>
+                <div class="dado"><strong>Nome:</strong> ${nome}</div>
+                <div class="dado"><strong>Idade:</strong> ${idade} anos</div>
+                <div class="dado"><strong>Cidade:</strong> ${cidade}</div>
+            `;
+
+            saida.innerHTML = mensagem;
+        }
+
+        // Permitir cadastro ao pressionar Enter
+        document.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                cadastrar();
+            }
+        });
+    </script>
+</body>
+</html>

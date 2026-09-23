@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda de Contatos</title>
+    <style>
+        body { text-align: center; background: #ecfeff; color: #083344; font-family: sans-serif; padding: 20px; }
+        .card { max-width: 300px; margin: 30px auto; padding: 20px; background: white; border: 2px solid #06b6d4; border-radius: 12px; }
+        h2 { color: #0891b2; }
+        button { padding: 8px 15px; margin: 5px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .claro { background: #67e8f9; color: #083344; }
+        .escuro { background: #164e63; color: white; }
+        body.escuro { background: #083344; color: white; }
+        body.escuro .card { background: #0e7490; border-color: #67e8f9; }
+        body.escuro h2 { color: #67e8f9; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📒 Agenda de Contatos</h2>
+        <p>Escolha o tema:</p>
+        <button class="claro" onclick="claro()">☀️ Claro</button>
+        <button class="escuro" onclick="escuro()">🌙 Escuro</button>
+        <p id="saida">Tema claro</p>
+    </div>
+
+    <script>
+        function claro() {
+            document.body.className = "";
+            document.getElementById("saida").innerText = "☀️ Tema claro";
+        }
+        function escuro() {
+            document.body.className = "escuro";
+            document.getElementById("saida").innerText = "🌙 Tema escuro";
+        }
+    </script>
+</body>
+</html>

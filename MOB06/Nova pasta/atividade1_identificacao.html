@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 1 - Identificação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0ea5e9;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-testar {
+            background-color: #0ea5e9;
+            color: white;
+        }
+
+        .btn-testar:hover {
+            background-color: #0284c7;
+        }
+
+        .btn-limpar {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-limpar:hover {
+            background-color: #dc2626;
+        }
+
+        #saida {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>👤 Identificação</h2>
+        <label for="nome">Digite seu nome:</label>
+        <input type="text" id="nome" placeholder="Ex: João Silva">
+        
+        <div class="botoes">
+            <button class="btn-testar" onclick="mensagem()">Testar</button>
+            <button class="btn-limpar" onclick="limpar()">Limpar</button>
+        </div>
+
+        <p id="saida"></p>
+    </div>
+
+    <script>
+        function mensagem() {
+            let nome = document.getElementById("nome").value;
+            
+            if (nome.trim() === "") {
+                document.getElementById("saida").innerText = "⚠️ Por favor, digite seu nome!";
+            } else {
+                document.getElementById("saida").innerText = `👋 Olá, ${nome}!`;
+            }
+        }
+
+        function limpar() {
+            document.getElementById("nome").value = "";
+            document.getElementById("saida").innerText = "";
+        }
+
+        // Permite pressionar Enter para testar
+        document.getElementById("nome").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                mensagem();
+            }
+        });
+    </script>
+</body>
+</html>

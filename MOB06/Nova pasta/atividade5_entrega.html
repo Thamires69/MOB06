@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 5 - Endereço de Entrega</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .opcao:hover {
+            background: #f0f9ff;
+            border-color: #0ea5e9;
+        }
+
+        .opcao input[type="radio"] {
+            margin-right: 15px;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .opcao label {
+            cursor: pointer;
+            flex: 1;
+            text-align: left;
+            margin: 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #saida {
+            padding: 20px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .endereco-selecionado {
+            font-size: 24px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📍 Endereço de Entrega</h2>
+        
+        <div class="opcoes">
+            <div class="opcao">
+                <input type="radio" id="casa" name="endereco" value="casa" checked onchange="selecionarEndereco()">
+                <label for="casa">🏠 Casa</label>
+            </div>
+            <div class="opcao">
+                <input type="radio" id="sitio" name="endereco" value="sitio" onchange="selecionarEndereco()">
+                <label for="sitio">🌳 Sítio</label>
+            </div>
+            <div class="opcao">
+                <input type="radio" id="trabalho" name="endereco" value="trabalho" onchange="selecionarEndereco()">
+                <label for="trabalho">🏢 Trabalho</label>
+            </div>
+        </div>
+
+        <div id="saida"></div>
+    </div>
+
+    <script>
+        function selecionarEndereco() {
+            let selecionado = document.querySelector('input[name="endereco"]:checked').value;
+            let saida = document.getElementById("saida");
+            let mensagem = "";
+
+            if (selecionado === "casa") {
+                mensagem = `
+                    <p>Seu pedido será entregue em:</p>
+                    <p class="endereco-selecionado">🏠 Casa</p>
+                    <p>A entrega ocorrerá no seu endereço residencial.</p>
+                `;
+            } else if (selecionado === "sitio") {
+                mensagem = `
+                    <p>Seu pedido será entregue em:</p>
+                    <p class="endereco-selecionado">🌳 Sítio</p>
+                    <p>A entrega ocorrerá no seu sítio/área rural.</p>
+                `;
+            } else if (selecionado === "trabalho") {
+                mensagem = `
+                    <p>Seu pedido será entregue em:</p>
+                    <p class="endereco-selecionado">🏢 Trabalho</p>
+                    <p>A entrega ocorrerá no seu local de trabalho.</p>
+                `;
+            }
+
+            saida.innerHTML = mensagem;
+        }
+
+        // Selecionar ao carregar
+        selecionarEndereco();
+    </script>
+</body>
+</html>

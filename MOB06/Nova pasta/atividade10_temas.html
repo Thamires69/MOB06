@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 10 - Tema Claro/Escuro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            background: #f8fafc;
+            color: #333;
+        }
+
+        body.escuro {
+            background: #1e293b;
+            color: #e2e8f0;
+        }
+
+        .card {
+            background: white;
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.escuro .card {
+            background: #334155;
+            border-color: #475569;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        .info-tema {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #0284c7;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.escuro .info-tema {
+            background: #1e3a8a;
+            color: #93c5fd;
+            border-color: #3b82f6;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .btn-claro {
+            background-color: #fbbf24;
+            color: #78350f;
+        }
+
+        .btn-claro:hover {
+            background-color: #f59e0b;
+        }
+
+        .btn-claro.ativo {
+            background-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-escuro {
+            background-color: #64748b;
+            color: #f1f5f9;
+        }
+
+        .btn-escuro:hover {
+            background-color: #475569;
+        }
+
+        body.escuro .btn-escuro.ativo {
+            background-color: #475569;
+            box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.3);
+        }
+
+        .descricao {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f9ff;
+            color: #0369a1;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.escuro .descricao {
+            background: #1e3a8a;
+            color: #93c5fd;
+        }
+
+        .tema-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .features {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .feature {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        body.escuro .feature {
+            border-bottom-color: #475569;
+        }
+
+        .feature:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🌓 Tema Claro/Escuro</h2>
+        
+        <div class="info-tema">
+            <span id="status-tema">☀️ Tema Claro Ativado</span>
+        </div>
+
+        <div class="tema-icon">
+            <span id="icon-tema">☀️</span>
+        </div>
+
+        <div class="botoes">
+            <button class="btn-claro ativo" id="btn-claro" onclick="ativarClaro()">☀️ Tema Claro</button>
+            <button class="btn-escuro" id="btn-escuro" onclick="ativarEscuro()">🌙 Tema Escuro</button>
+        </div>
+
+        <div class="descricao">
+            <p>Este é um exemplo de tema responsivo que se adapta às suas preferências. Clique nos botões acima para alternar entre os temas claro e escuro.</p>
+        </div>
+
+        <div class="features">
+            <h3 style="margin-bottom: 10px;">Recursos:</h3>
+            <div class="feature">✅ Interface responsiva</div>
+            <div class="feature">✅ Transições suaves</div>
+            <div class="feature">✅ Persistência de tema (opcional)</div>
+            <div class="feature">✅ Acessibilidade melhorada</div>
+        </div>
+    </div>
+
+    <script>
+        function ativarClaro() {
+            document.body.className = "";
+            document.getElementById("status-tema").innerText = "☀️ Tema Claro Ativado";
+            document.getElementById("icon-tema").innerText = "☀️";
+
+            document.getElementById("btn-claro").classList.add("ativo");
+            document.getElementById("btn-escuro").classList.remove("ativo");
+
+            // Salvar preferência (opcional)
+            localStorage.setItem("tema", "claro");
+        }
+
+        function ativarEscuro() {
+            document.body.className = "escuro";
+            document.getElementById("status-tema").innerText = "🌙 Tema Escuro Ativado";
+            document.getElementById("icon-tema").innerText = "🌙";
+
+            document.getElementById("btn-escuro").classList.add("ativo");
+            document.getElementById("btn-claro").classList.remove("ativo");
+
+            // Salvar preferência (opcional)
+            localStorage.setItem("tema", "escuro");
+        }
+
+        // Verificar preferência salva ao carregar
+        window.addEventListener("load", function() {
+            let tema = localStorage.getItem("tema");
+            
+            if (tema === "escuro") {
+                ativarEscuro();
+            } else {
+                ativarClaro();
+            }
+        });
+
+        // Detectar preferência do sistema (opcional)
+        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            if (!localStorage.getItem("tema")) {
+                ativarEscuro();
+            }
+        }
+    </script>
+</body>
+</html>

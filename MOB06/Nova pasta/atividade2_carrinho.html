@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 2 - Carrinho de Compras</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .produto-info {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .preco {
+            font-size: 20px;
+            font-weight: bold;
+            color: #059669;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #0ea5e9;
+        }
+
+        #saida {
+            padding: 20px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .total-preco {
+            font-size: 28px;
+            color: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎧 Carrinho de Compras</h2>
+        
+        <div class="produto-info">
+            <p>Produto: <strong>Fone de Ouvido</strong></p>
+            <p class="preco">R$ 29,00 cada</p>
+        </div>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" min="0" max="10" value="0" onchange="calcularTotal()">
+
+        <div id="saida">
+            <p>Escolha uma quantidade acima</p>
+        </div>
+    </div>
+
+    <script>
+        function calcularTotal() {
+            let quantidade = Number(document.getElementById("quantidade").value);
+            let preco = 29.00;
+            let total = preco * quantidade;
+
+            // Formatar com vírgula
+            let totalFormatado = total.toFixed(2).replace(".", ",");
+
+            let mensagem = `
+                <p>Quantidade: <strong>${quantidade}</strong> un.</p>
+                <p>Preço unitário: R$ 29,00</p>
+                <p class="total-preco">Total: R$ ${totalFormatado}</p>
+            `;
+
+            document.getElementById("saida").innerHTML = mensagem;
+        }
+
+        // Calcular ao carregar
+        calcularTotal();
+    </script>
+</body>
+</html>

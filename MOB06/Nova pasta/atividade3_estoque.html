@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 3 - Controle de Estoque</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .estoque-info {
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #16a34a;
+        }
+
+        .estoque-numero {
+            font-size: 32px;
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #0ea5e9;
+        }
+
+        #saida {
+            padding: 20px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .ok {
+            background: #dcfce7;
+            color: #166534;
+            border: 2px solid #16a34a;
+        }
+
+        .no {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎮 Controle de Estoque</h2>
+        
+        <div class="estoque-info">
+            <p>Controles em Estoque:</p>
+            <div class="estoque-numero">3</div>
+        </div>
+
+        <label for="quantidade">Quantos você deseja?</label>
+        <input type="number" id="quantidade" min="0" value="0" onchange="verificarEstoque()">
+
+        <div id="saida"></div>
+    </div>
+
+    <script>
+        function verificarEstoque() {
+            let solicitado = Number(document.getElementById("quantidade").value);
+            let disponivel = 3;
+            let saida = document.getElementById("saida");
+
+            if (solicitado > disponivel) {
+                saida.innerHTML = `❌ Estoque Insuficiente! Você solicitou ${solicitado}, mas temos apenas ${disponivel}.`;
+                saida.className = "no";
+            } else if (solicitado === 0) {
+                saida.innerHTML = "⚠️ Digite uma quantidade válida.";
+                saida.className = "";
+            } else {
+                saida.innerHTML = `✅ Pedido Confirmado! Você está levando ${solicitado} controle(s).`;
+                saida.className = "ok";
+            }
+        }
+
+        // Verificar ao carregar
+        verificarEstoque();
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 4 - Formas de Pagamento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #f8fafc;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #999;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .total-original {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .valor-total {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        select {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #0ea5e9;
+        }
+
+        #saida {
+            padding: 20px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .pix {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 2px solid #0284c7;
+        }
+
+        .cartao {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #f59e0b;
+        }
+
+        .dinheiro {
+            background: #dcfce7;
+            color: #166534;
+            border: 2px solid #16a34a;
+        }
+
+        .valor-final {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>💰 Formas de Pagamento</h2>
+        
+        <div class="total-original">
+            <p>Total do Pedido:</p>
+            <div class="valor-total">R$ 100,00</div>
+        </div>
+
+        <label for="pagamento">Escolha a forma de pagamento:</label>
+        <select id="pagamento" onchange="processarPagamento()">
+            <option value="pix">PIX - 5% de desconto</option>
+            <option value="cartao">Cartão - Sem desconto</option>
+            <option value="dinheiro">Dinheiro - 10% de desconto</option>
+        </select>
+
+        <div id="saida"></div>
+    </div>
+
+    <script>
+        function processarPagamento() {
+            let opcao = document.getElementById("pagamento").value;
+            let total = 100.00;
+            let valor = 0;
+            let desconto = 0;
+            let classe = "";
+            let emojis = "";
+
+            if (opcao === "pix") {
+                valor = total * 0.95;
+                desconto = 5;
+                classe = "pix";
+                emojis = "📱";
+            } else if (opcao === "cartao") {
+                valor = total;
+                desconto = 0;
+                classe = "cartao";
+                emojis = "💳";
+            } else if (opcao === "dinheiro") {
+                valor = total * 0.90;
+                desconto = 10;
+                classe = "dinheiro";
+                emojis = "💵";
+            }
+
+            let valorFormatado = valor.toFixed(2).replace(".", ",");
+
+            let mensagem = `
+                <p>${emojis} Forma de Pagamento Selecionada</p>
+                <p>Desconto: ${desconto}%</p>
+                <p class="valor-final">Total a Pagar: R$ ${valorFormatado}</p>
+            `;
+
+            let saida = document.getElementById("saida");
+            saida.innerHTML = mensagem;
+            saida.className = classe;
+        }
+
+        // Processar ao carregar
+        processarPagamento();
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Playlist Musical</title>
+    <style>
+        body { text-align: center; background: #f5f3ff; font-family: sans-serif; padding: 20px; }
+        .card { background: white; max-width: 320px; margin: 30px auto; padding: 18px; border: 2px solid #8b5cf6; border-radius: 12px; }
+        img { width: 200px; height: 200px; object-fit: cover; border-radius: 12px; }
+        button { padding: 8px 15px; margin: 5px; background: #8b5cf6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+        button:hover { background: #7c3aed; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🎵 Minha Playlist</h2>
+        <img id="capa" src="https://picsum.photos/id/1015/200/200">
+        <p id="titulo">Música 1</p>
+        <button onclick="anterior()">⬅️</button>
+        <button onclick="proxima()">➡️</button>
+    </div>
+
+    <script>
+        let numero = 1;
+        function mostrar() {
+            let capa = document.getElementById("capa");
+            let titulo = document.getElementById("titulo");
+            if (numero === 1) {
+                capa.src = "https://picsum.photos/id/1015/200/200";
+                titulo.innerText = "Música 1";
+            } else if (numero === 2) {
+                capa.src = "https://picsum.photos/id/1016/200/200";
+                titulo.innerText = "Música 2";
+            } else {
+                capa.src = "https://picsum.photos/id/1018/200/200";
+                titulo.innerText = "Música 3";
+            }
+        }
+        function proxima() {
+            numero++;
+            if (numero > 3) { numero = 1; }
+            mostrar();
+        }
+        function anterior() {
+            numero--;
+            if (numero < 1) { numero = 3; }
+            mostrar();
+        }
+    </script>
+</body>
+</html>
